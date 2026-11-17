@@ -16,7 +16,6 @@
             --item-border: #334155;
             --btn-bg: #0284c7;
             --btn-hover: #0369a1;
-            --badge-bg: #0369a1;
         }
 
         .light-mode {
@@ -30,8 +29,6 @@
             --item-border: #cbd5e1;
             --btn-bg: #0284c7;
             --btn-hover: #0369a1;
-            --badge-bg: #e0f2fe;
-            --badge-text: #0369a1;
         }
 
         body {
@@ -105,7 +102,6 @@
             margin-bottom: 15px;
             text-align: left;
         }
-        /* Skills Badges Style */
         .skills-container {
             display: flex;
             flex-wrap: wrap;
@@ -120,13 +116,13 @@
             font-size: 13px;
             font-weight: 600;
         }
-        .project-list {
+        .section-list {
             display: flex;
             flex-direction: column;
             gap: 12px;
             margin-bottom: 25px;
         }
-        .project-item {
+        .section-item {
             background-color: var(--item-bg);
             padding: 12px 15px;
             border-radius: 8px;
@@ -135,7 +131,7 @@
             align-items: center;
             border: 1px solid var(--item-border);
         }
-        .project-item span {
+        .section-item span {
             font-weight: bold;
             font-size: 14px;
         }
@@ -177,7 +173,7 @@
                 margin: 10px;
                 border: none;
             }
-            .project-item {
+            .section-item {
                 flex-direction: column;
                 gap: 10px;
                 text-align: center;
@@ -208,14 +204,23 @@
             <span class="skill-badge">Responsive Design</span>
         </div>
 
+        <!-- Resume Section -->
+        <h2>Resume 📄</h2>
+        <div class="section-list">
+            <div class="section-item">
+                <span>View My Professional Resume</span>
+                <a href="resume.html" class="btn" target="_blank">View Resume</a>
+            </div>
+        </div>
+
         <!-- Projects Section -->
         <h2>My Projects 🚀</h2>
-        <div class="project-list">
-            <div class="project-item">
+        <div class="section-list">
+            <div class="section-item">
                 <span>Digital Clock App</span>
                 <a href="clock.html" class="btn" target="_blank">View Live</a>
             </div>
-            <div class="project-item">
+            <div class="section-item">
                 <span>To-Do List Tracker</span>
                 <a href="todo.html" class="btn" target="_blank">View Live</a>
             </div>
@@ -250,9 +255,3 @@
 
 </body>
 </html>
-<!-- Resume Button -->
-        <h2>Resume 📄</h2>
-        <div class="project-item">
-            <span>View My Professional Resume</span>
-            <a href="resume.html" class="btn" target="_blank">View Resume</a>
-        </div>
