@@ -5,53 +5,99 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Guguloth Uday Kiran - Portfolio</title>
     <style>
+        :root {
+            --bg-color: #0f172a;
+            --card-bg: #1e293b;
+            --text-color: #f8fafc;
+            --tagline-color: #94a3b8;
+            --bio-bg: #0f172a;
+            --border-color: #38bdf8;
+            --item-bg: #0f172a;
+            --item-border: #334155;
+            --btn-bg: #0284c7;
+            --btn-hover: #0369a1;
+        }
+
+        .light-mode {
+            --bg-color: #f1f5f9;
+            --card-bg: #ffffff;
+            --text-color: #0f172a;
+            --tagline-color: #475569;
+            --bio-bg: #f8fafc;
+            --border-color: #0284c7;
+            --item-bg: #f8fafc;
+            --item-border: #cbd5e1;
+            --btn-bg: #0284c7;
+            --btn-hover: #0369a1;
+        }
+
         body {
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            background-color: #0f172a;
-            color: #f8fafc;
+            background-color: var(--bg-color);
+            color: var(--text-color);
             margin: 0;
             padding: 0;
             display: flex;
             justify-content: center;
             align-items: center;
             min-height: 100vh;
+            transition: background 0.3s, color 0.3s;
         }
         .portfolio-card {
-            background-color: #1e293b;
+            background-color: var(--card-bg);
             width: 100%;
             max-width: 600px;
             padding: 40px;
             border-radius: 16px;
-            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
             text-align: center;
-            border: 2px solid #38bdf8;
+            border: 2px solid var(--border-color);
             margin: 20px;
+            position: relative;
+            transition: background 0.3s, border 0.3s;
+        }
+        .theme-btn {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            background-color: var(--item-border);
+            color: var(--text-color);
+            border: none;
+            padding: 6px 12px;
+            border-radius: 20px;
+            cursor: pointer;
+            font-size: 13px;
+            font-weight: bold;
+            transition: 0.3s;
+        }
+        .theme-btn:hover {
+            opacity: 0.8;
         }
         h1 {
-            color: #38bdf8;
+            color: var(--border-color);
             margin-bottom: 10px;
             font-size: 28px;
+            margin-top: 10px;
         }
         .tagline {
-            color: #94a3b8;
+            color: var(--tagline-color);
             font-size: 16px;
             margin-bottom: 25px;
         }
         .bio {
-            background-color: #0f172a;
+            background-color: var(--bio-bg);
             padding: 15px;
             border-radius: 8px;
             font-size: 15px;
             line-height: 1.6;
             margin-bottom: 30px;
-            color: #e2e8f0;
-            border-left: 4px solid #38bdf8;
             text-align: left;
+            border-left: 4px solid var(--border-color);
         }
         h2 {
             font-size: 20px;
-            color: #38bdf8;
-            border-bottom: 1px solid #334155;
+            color: var(--border-color);
+            border-bottom: 1px solid var(--item-border);
             padding-bottom: 8px;
             margin-bottom: 20px;
             text-align: left;
@@ -63,20 +109,19 @@
             margin-bottom: 30px;
         }
         .project-item {
-            background-color: #0f172a;
+            background-color: var(--item-bg);
             padding: 15px;
             border-radius: 8px;
             display: flex;
             justify-content: space-between;
             align-items: center;
-            border: 1px solid #334155;
+            border: 1px solid var(--item-border);
         }
         .project-item span {
             font-weight: bold;
-            color: #f1f5f9;
         }
         .btn {
-            background-color: #0284c7;
+            background-color: var(--btn-bg);
             color: white;
             padding: 8px 16px;
             border-radius: 6px;
@@ -85,19 +130,35 @@
             transition: background 0.3s;
         }
         .btn:hover {
-            background-color: #0369a1;
+            background-color: var(--btn-hover);
         }
         .footer {
             font-size: 13px;
-            color: #64748b;
-            border-top: 1px solid #334155;
+            color: var(--tagline-color);
+            border-top: 1px solid var(--item-border);
             padding-top: 15px;
+        }
+
+        @media (max-width: 600px) {
+            .portfolio-card {
+                padding: 20px;
+                margin: 10px;
+                border: none;
+            }
+            .project-item {
+                flex-direction: column;
+                gap: 10px;
+                text-align: center;
+            }
         }
     </style>
 </head>
 <body>
 
     <div class="portfolio-card">
+        <!-- Theme Toggle Button -->
+        <button class="theme-btn" onclick="toggleTheme()">☀️ Light</button>
+
         <h1>Guguloth Uday Kiran</h1>
         <div class="tagline">Aspiring Frontend Developer & Tech Enthusiast</div>
 
@@ -109,18 +170,34 @@
         <div class="project-list">
             <div class="project-item">
                 <span>Digital Clock App</span>
-                <a href="#" class="btn" target="_blank">View Live</a>
+                <a href="clock.html" class="btn" target="_blank">View Live</a>
             </div>
             <div class="project-item">
                 <span>To-Do List Tracker</span>
-                <a href="#" class="btn" target="_blank">View Live</a>
+                <a href="todo.html" class="btn" target="_blank">View Live</a>
             </div>
         </div>
 
         <div class="footer">
-            Goal: Minimum ₹50K+ Tech Job | Built with HTML & CSS
+            Goal: Minimum ₹50K+ Tech Job | Built with HTML, CSS & JS
         </div>
     </div>
+
+    <!-- JavaScript for Theme Toggle -->
+    <script>
+        function toggleTheme() {
+            const body = document.body;
+            const btn = document.querySelector('.theme-btn');
+            
+            body.classList.toggle('light-mode');
+            
+            if (body.classList.contains('light-mode')) {
+                btn.textContent = '🌙 Dark';
+            } else {
+                btn.textContent = '☀️ Light';
+            }
+        }
+    </script>
 
 </body>
 </html>
