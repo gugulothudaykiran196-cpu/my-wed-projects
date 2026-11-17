@@ -16,6 +16,7 @@
             --item-border: #334155;
             --btn-bg: #0284c7;
             --btn-hover: #0369a1;
+            --badge-bg: #0369a1;
         }
 
         .light-mode {
@@ -29,6 +30,8 @@
             --item-border: #cbd5e1;
             --btn-bg: #0284c7;
             --btn-hover: #0369a1;
+            --badge-bg: #e0f2fe;
+            --badge-text: #0369a1;
         }
 
         body {
@@ -90,27 +93,42 @@
             border-radius: 8px;
             font-size: 15px;
             line-height: 1.6;
-            margin-bottom: 30px;
+            margin-bottom: 25px;
             text-align: left;
             border-left: 4px solid var(--border-color);
         }
         h2 {
-            font-size: 20px;
+            font-size: 18px;
             color: var(--border-color);
             border-bottom: 1px solid var(--item-border);
-            padding-bottom: 8px;
-            margin-bottom: 20px;
+            padding-bottom: 6px;
+            margin-bottom: 15px;
             text-align: left;
+        }
+        /* Skills Badges Style */
+        .skills-container {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+            margin-bottom: 25px;
+        }
+        .skill-badge {
+            background-color: var(--item-border);
+            color: var(--text-color);
+            padding: 6px 12px;
+            border-radius: 20px;
+            font-size: 13px;
+            font-weight: 600;
         }
         .project-list {
             display: flex;
             flex-direction: column;
-            gap: 15px;
-            margin-bottom: 30px;
+            gap: 12px;
+            margin-bottom: 25px;
         }
         .project-item {
             background-color: var(--item-bg);
-            padding: 15px;
+            padding: 12px 15px;
             border-radius: 8px;
             display: flex;
             justify-content: space-between;
@@ -119,24 +137,38 @@
         }
         .project-item span {
             font-weight: bold;
+            font-size: 14px;
         }
         .btn {
             background-color: var(--btn-bg);
             color: white;
-            padding: 8px 16px;
+            padding: 6px 14px;
             border-radius: 6px;
             text-decoration: none;
-            font-size: 14px;
+            font-size: 13px;
             transition: background 0.3s;
         }
         .btn:hover {
             background-color: var(--btn-hover);
         }
+        .contact-section {
+            text-align: left;
+            margin-bottom: 20px;
+            font-size: 14px;
+        }
+        .contact-section a {
+            color: var(--border-color);
+            text-decoration: none;
+            font-weight: bold;
+        }
+        .contact-section a:hover {
+            text-decoration: underline;
+        }
         .footer {
             font-size: 13px;
             color: var(--tagline-color);
             border-top: 1px solid var(--item-border);
-            padding-top: 15px;
+            padding-top: 12px;
         }
 
         @media (max-width: 600px) {
@@ -166,6 +198,17 @@
             <strong>About Me:</strong> Currently working in India Post as ABPM, but passionate about transitioning into the tech industry. Self-taught in HTML, CSS, and JavaScript, aiming to build impactful web applications and secure a technical role.
         </div>
 
+        <!-- Skills Section -->
+        <h2>Tech Stack & Skills 💻</h2>
+        <div class="skills-container">
+            <span class="skill-badge">HTML5</span>
+            <span class="skill-badge">CSS3 (Flexbox/Grid)</span>
+            <span class="skill-badge">JavaScript (DOM)</span>
+            <span class="skill-badge">Git & GitHub</span>
+            <span class="skill-badge">Responsive Design</span>
+        </div>
+
+        <!-- Projects Section -->
         <h2>My Projects 🚀</h2>
         <div class="project-list">
             <div class="project-item">
@@ -176,6 +219,12 @@
                 <span>To-Do List Tracker</span>
                 <a href="todo.html" class="btn" target="_blank">View Live</a>
             </div>
+        </div>
+
+        <!-- Contact Section -->
+        <h2>Let's Connect 📬</h2>
+        <div class="contact-section">
+            Reach out via <a href="https://linkedin.com" target="_blank">LinkedIn</a> or check my code on <a href="https://github.com/gugulothudaykiran196-cpu" target="_blank">GitHub</a>.
         </div>
 
         <div class="footer">
