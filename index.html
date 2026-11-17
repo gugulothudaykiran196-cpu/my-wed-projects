@@ -3,255 +3,138 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Guguloth Uday Kiran - Portfolio</title>
+    <title>Weather App - Uday's Portfolio</title>
     <style>
-        :root {
-            --bg-color: #0f172a;
-            --card-bg: #1e293b;
-            --text-color: #f8fafc;
-            --tagline-color: #94a3b8;
-            --bio-bg: #0f172a;
-            --border-color: #38bdf8;
-            --item-bg: #0f172a;
-            --item-border: #334155;
-            --btn-bg: #0284c7;
-            --btn-hover: #0369a1;
-        }
-
-        .light-mode {
-            --bg-color: #f1f5f9;
-            --card-bg: #ffffff;
-            --text-color: #0f172a;
-            --tagline-color: #475569;
-            --bio-bg: #f8fafc;
-            --border-color: #0284c7;
-            --item-bg: #f8fafc;
-            --item-border: #cbd5e1;
-            --btn-bg: #0284c7;
-            --btn-hover: #0369a1;
-        }
-
         body {
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            background-color: var(--bg-color);
-            color: var(--text-color);
+            background-color: #0f172a;
+            color: #f8fafc;
             margin: 0;
-            padding: 0;
+            padding: 20px;
             display: flex;
             justify-content: center;
             align-items: center;
             min-height: 100vh;
-            transition: background 0.3s, color 0.3s;
         }
-        .portfolio-card {
-            background-color: var(--card-bg);
+        .weather-card {
+            background-color: #1e293b;
             width: 100%;
-            max-width: 600px;
-            padding: 40px;
+            max-width: 400px;
+            padding: 30px;
             border-radius: 16px;
-            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+            border: 2px solid #38bdf8;
             text-align: center;
-            border: 2px solid var(--border-color);
-            margin: 20px;
-            position: relative;
-            transition: background 0.3s, border 0.3s;
-        }
-        .theme-btn {
-            position: absolute;
-            top: 20px;
-            right: 20px;
-            background-color: var(--item-border);
-            color: var(--text-color);
-            border: none;
-            padding: 6px 12px;
-            border-radius: 20px;
-            cursor: pointer;
-            font-size: 13px;
-            font-weight: bold;
-            transition: 0.3s;
-        }
-        .theme-btn:hover {
-            opacity: 0.8;
         }
         h1 {
-            color: var(--border-color);
-            margin-bottom: 10px;
-            font-size: 28px;
-            margin-top: 10px;
+            color: #38bdf8;
+            font-size: 24px;
+            margin-bottom: 20px;
         }
-        .tagline {
-            color: var(--tagline-color);
-            font-size: 16px;
-            margin-bottom: 25px;
-        }
-        .bio {
-            background-color: var(--bio-bg);
-            padding: 15px;
-            border-radius: 8px;
-            font-size: 15px;
-            line-height: 1.6;
-            margin-bottom: 25px;
-            text-align: left;
-            border-left: 4px solid var(--border-color);
-        }
-        h2 {
-            font-size: 18px;
-            color: var(--border-color);
-            border-bottom: 1px solid var(--item-border);
-            padding-bottom: 6px;
-            margin-bottom: 15px;
-            text-align: left;
-        }
-        .skills-container {
+        .search-box {
             display: flex;
-            flex-wrap: wrap;
             gap: 10px;
             margin-bottom: 25px;
         }
-        .skill-badge {
-            background-color: var(--item-border);
-            color: var(--text-color);
-            padding: 6px 12px;
-            border-radius: 20px;
-            font-size: 13px;
-            font-weight: 600;
-        }
-        .section-list {
-            display: flex;
-            flex-direction: column;
-            gap: 12px;
-            margin-bottom: 25px;
-        }
-        .section-item {
-            background-color: var(--item-bg);
-            padding: 12px 15px;
-            border-radius: 8px;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            border: 1px solid var(--item-border);
-        }
-        .section-item span {
-            font-weight: bold;
+        input {
+            flex: 1;
+            padding: 10px;
+            border-radius: 6px;
+            border: 1px solid #334155;
+            background-color: #0f172a;
+            color: white;
             font-size: 14px;
         }
-        .btn {
-            background-color: var(--btn-bg);
+        button {
+            background-color: #0284c7;
             color: white;
-            padding: 6px 14px;
+            border: none;
+            padding: 10px 15px;
             border-radius: 6px;
-            text-decoration: none;
-            font-size: 13px;
+            cursor: pointer;
+            font-weight: bold;
             transition: background 0.3s;
         }
-        .btn:hover {
-            background-color: var(--btn-hover);
+        button:hover {
+            background-color: #0369a1;
         }
-        .contact-section {
-            text-align: left;
-            margin-bottom: 20px;
+        .weather-info {
+            background-color: #0f172a;
+            padding: 20px;
+            border-radius: 8px;
+            border: 1px solid #334155;
+        }
+        .temp {
+            font-size: 36px;
+            font-weight: bold;
+            color: #38bdf8;
+            margin: 10px 0;
+        }
+        .desc {
+            font-size: 16px;
+            color: #94a3b8;
+            text-transform: capitalize;
+        }
+        .back-btn {
+            display: inline-block;
+            margin-top: 20px;
+            color: #38bdf8;
+            text-decoration: none;
             font-size: 14px;
         }
-        .contact-section a {
-            color: var(--border-color);
-            text-decoration: none;
-            font-weight: bold;
-        }
-        .contact-section a:hover {
+        .back-btn:hover {
             text-decoration: underline;
-        }
-        .footer {
-            font-size: 13px;
-            color: var(--tagline-color);
-            border-top: 1px solid var(--item-border);
-            padding-top: 12px;
-        }
-
-        @media (max-width: 600px) {
-            .portfolio-card {
-                padding: 20px;
-                margin: 10px;
-                border: none;
-            }
-            .section-item {
-                flex-direction: column;
-                gap: 10px;
-                text-align: center;
-            }
         }
     </style>
 </head>
 <body>
 
-    <div class="portfolio-card">
-        <!-- Theme Toggle Button -->
-        <button class="theme-btn" onclick="toggleTheme()">☀️ Light</button>
-
-        <h1>Guguloth Uday Kiran</h1>
-        <div class="tagline">Aspiring Frontend Developer & Tech Enthusiast</div>
-
-        <div class="bio">
-            <strong>About Me:</strong> Currently working in India Post as ABPM, but passionate about transitioning into the tech industry. Self-taught in HTML, CSS, and JavaScript, aiming to build impactful web applications and secure a technical role.
+    <div class="weather-card">
+        <h1>Weather App 🌤️</h1>
+        
+        <div class="search-box">
+            <input type="text" id="cityInput" placeholder="Enter city name..." value="Hyderabad">
+            <button onclick="getWeather()">Search</button>
         </div>
 
-        <!-- Skills Section -->
-        <h2>Tech Stack & Skills 💻</h2>
-        <div class="skills-container">
-            <span class="skill-badge">HTML5</span>
-            <span class="skill-badge">CSS3 (Flexbox/Grid)</span>
-            <span class="skill-badge">JavaScript (DOM)</span>
-            <span class="skill-badge">Git & GitHub</span>
-            <span class="skill-badge">Responsive Design</span>
+        <div class="weather-info" id="weatherInfo">
+            <h2 id="cityName" style="margin: 0; color: #f8fafc; font-size: 20px;">Hyderabad</h2>
+            <div class="temp" id="tempVal">32°C</div>
+            <div class="desc" id="descVal">Partly Cloudy</div>
         </div>
 
-        <!-- Resume Section -->
-        <h2>Resume 📄</h2>
-        <div class="section-list">
-            <div class="section-item">
-                <span>View My Professional Resume</span>
-                <a href="resume.html" class="btn" target="_blank">View Resume</a>
-            </div>
-        </div>
-
-        <!-- Projects Section -->
-        <h2>My Projects 🚀</h2>
-        <div class="section-list">
-            <div class="section-item">
-                <span>Digital Clock App</span>
-                <a href="clock.html" class="btn" target="_blank">View Live</a>
-            </div>
-            <div class="section-item">
-                <span>To-Do List Tracker</span>
-                <a href="todo.html" class="btn" target="_blank">View Live</a>
-            </div>
-        </div>
-
-        <!-- Contact Section -->
-        <h2>Let's Connect 📬</h2>
-        <div class="contact-section">
-            Reach out via <a href="https://linkedin.com" target="_blank">LinkedIn</a> or check my code on <a href="https://github.com/gugulothudaykiran196-cpu" target="_blank">GitHub</a>.
-        </div>
-
-        <div class="footer">
-            Goal: Minimum ₹50K+ Tech Job | Built with HTML, CSS & JS
-        </div>
+        <a href="index.html" class="back-btn">← Back to Portfolio</a>
     </div>
 
-    <!-- JavaScript for Theme Toggle -->
     <script>
-        function toggleTheme() {
-            const body = document.body;
-            const btn = document.querySelector('.theme-btn');
-            
-            body.classList.toggle('light-mode');
-            
-            if (body.classList.contains('light-mode')) {
-                btn.textContent = '🌙 Dark';
-            } else {
-                btn.textContent = '☀️ Light';
+        // Simple JavaScript Weather Simulation / API structure
+        function getWeather() {
+            const city = document.getElementById('cityInput').value;
+            const cityName = document.getElementById('cityName');
+            const tempVal = document.getElementById('tempVal');
+            const descVal = document.getElementById('descVal');
+
+            if(city.trim() === "") {
+                alert("Please enter a city name!");
+                return;
             }
+
+            // For now updating dynamically to show interactive JS functionality
+            cityName.textContent = city.charAt(0).toUpperCase() + city.slice(1);
+            
+            // Random mock data calculation for interactive feel
+            const randomTemp = Math.floor(Math.random() * (38 - 22 + 1)) + 22;
+            tempVal.textContent = randomTemp + "°C";
+            
+            const conditions = ["Sunny", "Partly Cloudy", "Clear Sky", "Light Breeze"];
+            const randomDesc = conditions[Math.floor(Math.random() * conditions.length)];
+            descVal.textContent = randomDesc;
         }
     </script>
 
 </body>
 </html>
+<div class="section-item">
+                <span>Weather App (JS)</span>
+                <a href="weather.html" class="btn" target="_blank">View Live</a>
+            </div>
