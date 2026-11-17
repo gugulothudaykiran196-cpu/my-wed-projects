@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Quote Generator - Uday's Portfolio</title>
+    <title>To-Do List with Local Storage - Uday's Portfolio</title>
     <style>
         body {
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
@@ -16,51 +16,77 @@
             align-items: center;
             min-height: 100vh;
         }
-        .quote-card {
+        .todo-card {
             background-color: #1e293b;
             width: 100%;
             max-width: 450px;
-            padding: 40px;
+            padding: 30px;
             border-radius: 16px;
             box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
             border: 2px solid #38bdf8;
-            text-align: center;
         }
         h1 {
             color: #38bdf8;
             font-size: 24px;
-            margin-bottom: 25px;
-        }
-        .quote-text {
-            font-size: 18px;
-            font-style: italic;
-            line-height: 1.6;
             margin-bottom: 20px;
-            color: #e2e8f0;
-            min-height: 80px;
+            text-align: center;
         }
-        .quote-author {
+        .input-box {
+            display: flex;
+            gap: 10px;
+            margin-bottom: 20px;
+        }
+        input {
+            flex: 1;
+            padding: 10px;
+            border-radius: 6px;
+            border: 1px solid #334155;
+            background-color: #0f172a;
+            color: white;
             font-size: 14px;
-            color: #94a3b8;
-            margin-bottom: 30px;
-            font-weight: bold;
         }
-        .generate-btn {
+        button {
             background-color: #0284c7;
             color: white;
             border: none;
-            padding: 10px 20px;
+            padding: 10px 15px;
             border-radius: 6px;
             cursor: pointer;
             font-weight: bold;
-            font-size: 14px;
             transition: background 0.3s;
         }
-        .generate-btn:hover {
+        button:hover {
             background-color: #0369a1;
+        }
+        ul {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+            max-height: 250px;
+            overflow-y: auto;
+        }
+        li {
+            background-color: #0f172a;
+            padding: 10px 12px;
+            border-radius: 6px;
+            margin-bottom: 8px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border: 1px solid #334155;
+            font-size: 14px;
+        }
+        li button {
+            background-color: #ef4444;
+            padding: 4px 8px;
+            font-size: 12px;
+        }
+        li button:hover {
+            background-color: #dc2626;
         }
         .back-btn {
             display: block;
+            text-align: center;
             margin-top: 25px;
             color: #38bdf8;
             text-decoration: none;
@@ -73,43 +99,74 @@
 </head>
 <body>
 
-    <div class="quote-card">
-        <h1>Daily Inspiration 💡</h1>
+    <div class="todo-card">
+        <h1>To-Do List 📝</h1>
         
-        <div class="quote-text" id="quoteText">
-            "The secret of getting ahead is getting started."
-        </div>
-        <div class="quote-author" id="quoteAuthor">
-            - Mark Twain
+        <div class="input-box">
+            <input type="text" id="taskInput" placeholder="Add a new task...">
+            <button onclick="addTask()">Add</button>
         </div>
 
-        <button class="generate-btn" onclick="generateQuote()">New Quote</button>
+        <ul id="taskList"></ul>
 
         <a href="index.html" class="back-btn">← Back to Portfolio</a>
     </div>
 
     <script>
-        const quotes = [
-            { text: "The secret of getting ahead is getting started.", author: "Mark Twain" },
-            { text: "It always seems impossible until it's done.", author: "Nelson Mandela" },
-            { text: "Don't watch the clock; do what it does. Keep going.", author: "Sam Levenson" },
-            { text: "Believe you can and you're halfway there.", author: "Theodore Roosevelt" },
-            { text: "Success is not final; failure is not fatal: It is the courage to continue that counts.", author: "Winston Churchill" },
-            { text: "Code is like humor. When you have to explain it, it’s bad.", author: "Cory House" }
-        ];
+        // Select elements
+        const taskInput = document.getElementById('taskInput');
+        const taskList = document.getElementById('taskList');
 
-        function generateQuote() {
-            const randomIndex = Math.floor(Math.random() * quotes.length);
-            const selectedQuote = quotes[randomIndex];
-            
-            document.getElementById('quoteText').textContent = `"${selectedQuote.text}"`;
-            document.getElementById('quoteAuthor').textContent = `- ${selectedQuote.author}`;
+        // Load saved tasks from Local Storage when page opens
+        document.addEventListener('DOMContentLoaded', loadTasks);
+
+        function addTask() {
+            const taskText = taskInput.value.trim();
+            if (taskText === "") {
+                alert("Please enter a task!");
+                return;
+            }
+
+            createTaskElement(taskText);
+            saveTaskToLocalStorage(taskText);
+            taskInput.value = "";
+        }
+
+        function createTaskElement(taskText) {
+            const li = document.createElement('li');
+            li.innerHTML = `
+                <span>${taskText}</span>
+                <button onclick="deleteTask(this)">Delete</button>
+            `;
+            taskList.appendChild(li);
+        }
+
+        // Save task to browser Local Storage
+        function saveTaskToLocalStorage(task) {
+            let tasks = localStorage.getItem('tasks') ? JSON.parse(localStorage.getItem('tasks')) : [];
+            tasks.push(task);
+            localStorage.setItem('tasks', JSON.stringify(tasks));
+        }
+
+        // Load tasks function
+        function loadTasks() {
+            let tasks = localStorage.getItem('tasks') ? JSON.parse(localStorage.getItem('tasks')) : [];
+            tasks.forEach(task => {
+                createTaskElement(task);
+            });
+        }
+
+        // Delete task function and update Local Storage
+        function deleteTask(button) {
+            const li = button.parentElement;
+            const taskText = li.querySelector('span').textContent;
+            li.remove();
+
+            let tasks = JSON.parse(localStorage.getItem('tasks'));
+            tasks = tasks.filter(task => task !== taskText);
+            localStorage.setItem('tasks', JSON.stringify(tasks));
         }
     </script>
 
 </body>
 </html>
-<div class="section-item">
-                <span>Quote Generator (JS)</span>
-                <a href="quote.html" class="btn" target="_blank">View Live</a>
-            </div>
