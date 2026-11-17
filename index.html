@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Weather App - Uday's Portfolio</title>
+    <title>Quote Generator - Uday's Portfolio</title>
     <style>
         body {
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
@@ -16,11 +16,11 @@
             align-items: center;
             min-height: 100vh;
         }
-        .weather-card {
+        .quote-card {
             background-color: #1e293b;
             width: 100%;
-            max-width: 400px;
-            padding: 30px;
+            max-width: 450px;
+            padding: 40px;
             border-radius: 16px;
             box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
             border: 2px solid #38bdf8;
@@ -29,55 +29,39 @@
         h1 {
             color: #38bdf8;
             font-size: 24px;
-            margin-bottom: 20px;
-        }
-        .search-box {
-            display: flex;
-            gap: 10px;
             margin-bottom: 25px;
         }
-        input {
-            flex: 1;
-            padding: 10px;
-            border-radius: 6px;
-            border: 1px solid #334155;
-            background-color: #0f172a;
-            color: white;
-            font-size: 14px;
+        .quote-text {
+            font-size: 18px;
+            font-style: italic;
+            line-height: 1.6;
+            margin-bottom: 20px;
+            color: #e2e8f0;
+            min-height: 80px;
         }
-        button {
+        .quote-author {
+            font-size: 14px;
+            color: #94a3b8;
+            margin-bottom: 30px;
+            font-weight: bold;
+        }
+        .generate-btn {
             background-color: #0284c7;
             color: white;
             border: none;
-            padding: 10px 15px;
+            padding: 10px 20px;
             border-radius: 6px;
             cursor: pointer;
             font-weight: bold;
+            font-size: 14px;
             transition: background 0.3s;
         }
-        button:hover {
+        .generate-btn:hover {
             background-color: #0369a1;
         }
-        .weather-info {
-            background-color: #0f172a;
-            padding: 20px;
-            border-radius: 8px;
-            border: 1px solid #334155;
-        }
-        .temp {
-            font-size: 36px;
-            font-weight: bold;
-            color: #38bdf8;
-            margin: 10px 0;
-        }
-        .desc {
-            font-size: 16px;
-            color: #94a3b8;
-            text-transform: capitalize;
-        }
         .back-btn {
-            display: inline-block;
-            margin-top: 20px;
+            display: block;
+            margin-top: 25px;
             color: #38bdf8;
             text-decoration: none;
             font-size: 14px;
@@ -89,52 +73,43 @@
 </head>
 <body>
 
-    <div class="weather-card">
-        <h1>Weather App 🌤️</h1>
+    <div class="quote-card">
+        <h1>Daily Inspiration 💡</h1>
         
-        <div class="search-box">
-            <input type="text" id="cityInput" placeholder="Enter city name..." value="Hyderabad">
-            <button onclick="getWeather()">Search</button>
+        <div class="quote-text" id="quoteText">
+            "The secret of getting ahead is getting started."
+        </div>
+        <div class="quote-author" id="quoteAuthor">
+            - Mark Twain
         </div>
 
-        <div class="weather-info" id="weatherInfo">
-            <h2 id="cityName" style="margin: 0; color: #f8fafc; font-size: 20px;">Hyderabad</h2>
-            <div class="temp" id="tempVal">32°C</div>
-            <div class="desc" id="descVal">Partly Cloudy</div>
-        </div>
+        <button class="generate-btn" onclick="generateQuote()">New Quote</button>
 
         <a href="index.html" class="back-btn">← Back to Portfolio</a>
     </div>
 
     <script>
-        // Simple JavaScript Weather Simulation / API structure
-        function getWeather() {
-            const city = document.getElementById('cityInput').value;
-            const cityName = document.getElementById('cityName');
-            const tempVal = document.getElementById('tempVal');
-            const descVal = document.getElementById('descVal');
+        const quotes = [
+            { text: "The secret of getting ahead is getting started.", author: "Mark Twain" },
+            { text: "It always seems impossible until it's done.", author: "Nelson Mandela" },
+            { text: "Don't watch the clock; do what it does. Keep going.", author: "Sam Levenson" },
+            { text: "Believe you can and you're halfway there.", author: "Theodore Roosevelt" },
+            { text: "Success is not final; failure is not fatal: It is the courage to continue that counts.", author: "Winston Churchill" },
+            { text: "Code is like humor. When you have to explain it, it’s bad.", author: "Cory House" }
+        ];
 
-            if(city.trim() === "") {
-                alert("Please enter a city name!");
-                return;
-            }
-
-            // For now updating dynamically to show interactive JS functionality
-            cityName.textContent = city.charAt(0).toUpperCase() + city.slice(1);
+        function generateQuote() {
+            const randomIndex = Math.floor(Math.random() * quotes.length);
+            const selectedQuote = quotes[randomIndex];
             
-            // Random mock data calculation for interactive feel
-            const randomTemp = Math.floor(Math.random() * (38 - 22 + 1)) + 22;
-            tempVal.textContent = randomTemp + "°C";
-            
-            const conditions = ["Sunny", "Partly Cloudy", "Clear Sky", "Light Breeze"];
-            const randomDesc = conditions[Math.floor(Math.random() * conditions.length)];
-            descVal.textContent = randomDesc;
+            document.getElementById('quoteText').textContent = `"${selectedQuote.text}"`;
+            document.getElementById('quoteAuthor').textContent = `- ${selectedQuote.author}`;
         }
     </script>
 
 </body>
 </html>
 <div class="section-item">
-                <span>Weather App (JS)</span>
-                <a href="weather.html" class="btn" target="_blank">View Live</a>
+                <span>Quote Generator (JS)</span>
+                <a href="quote.html" class="btn" target="_blank">View Live</a>
             </div>
