@@ -3,168 +3,249 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>To-Do List with Local Storage - Uday's Portfolio</title>
+    <title>Guguloth Uday Kiran - Frontend Developer Portfolio</title>
     <style>
+        :root {
+            --bg-color: #0f172a;
+            --card-bg: #1e293b;
+            --text-color: #f8fafc;
+            --text-secondary: #94a3b8;
+            --accent-color: #38bdf8;
+            --accent-hover: #0284c7;
+            --border-color: #334155;
+        }
+
+        .light-mode {
+            --bg-color: #f1f5f9;
+            --card-bg: #ffffff;
+            --text-color: #0f172a;
+            --text-secondary: #64748b;
+            --accent-color: #0284c7;
+            --accent-hover: #0369a1;
+            --border-color: #cbd5e1;
+        }
+
         body {
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            background-color: #0f172a;
-            color: #f8fafc;
+            background-color: var(--bg-color);
+            color: var(--text-color);
             margin: 0;
             padding: 20px;
             display: flex;
             justify-content: center;
             align-items: center;
             min-height: 100vh;
+            transition: background-color 0.3s ease, color 0.3s ease;
         }
-        .todo-card {
-            background-color: #1e293b;
+
+        .portfolio-card {
+            background-color: var(--card-bg);
             width: 100%;
-            max-width: 450px;
-            padding: 30px;
-            border-radius: 16px;
-            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
-            border: 2px solid #38bdf8;
+            max-width: 550px;
+            padding: 35px;
+            border-radius: 20px;
+            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.4);
+            border: 2px solid var(--accent-color);
+            position: relative;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
         }
-        h1 {
-            color: #38bdf8;
-            font-size: 24px;
-            margin-bottom: 20px;
-            text-align: center;
+
+        .portfolio-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 20px 40px rgba(56, 189, 248, 0.2);
         }
-        .input-box {
-            display: flex;
-            gap: 10px;
-            margin-bottom: 20px;
-        }
-        input {
-            flex: 1;
-            padding: 10px;
-            border-radius: 6px;
-            border: 1px solid #334155;
-            background-color: #0f172a;
-            color: white;
-            font-size: 14px;
-        }
-        button {
-            background-color: #0284c7;
-            color: white;
-            border: none;
-            padding: 10px 15px;
-            border-radius: 6px;
+
+        .theme-toggle {
+            position: absolute;
+            top: 25px;
+            right: 25px;
+            background: none;
+            border: 1px solid var(--border-color);
+            color: var(--text-color);
+            padding: 6px 12px;
+            border-radius: 20px;
             cursor: pointer;
+            font-size: 12px;
             font-weight: bold;
-            transition: background 0.3s;
+            transition: all 0.3s ease;
         }
-        button:hover {
-            background-color: #0369a1;
+
+        .theme-toggle:hover {
+            border-color: var(--accent-color);
         }
-        ul {
-            list-style: none;
-            padding: 0;
-            margin: 0;
-            max-height: 250px;
-            overflow-y: auto;
+
+        h1 {
+            color: var(--accent-color);
+            font-size: 26px;
+            margin-bottom: 5px;
         }
-        li {
-            background-color: #0f172a;
-            padding: 10px 12px;
+
+        .subtitle {
+            color: var(--text-secondary);
+            font-size: 14px;
+            margin-bottom: 20px;
+        }
+
+        .section-box {
+            background-color: var(--bg-color);
+            padding: 15px;
+            border-radius: 10px;
+            border: 1px solid var(--border-color);
+            margin-bottom: 15px;
+            font-size: 14px;
+            line-height: 1.5;
+        }
+
+        h3 {
+            font-size: 16px;
+            color: var(--accent-color);
+            margin-top: 0;
+            margin-bottom: 10px;
+        }
+
+        .skills-badges {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+        }
+
+        .badge {
+            background-color: var(--card-bg);
+            border: 1px solid var(--accent-color);
+            color: var(--accent-color);
+            padding: 5px 10px;
             border-radius: 6px;
-            margin-bottom: 8px;
+            font-size: 12px;
+            font-weight: bold;
+        }
+
+        .section-list {
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+        }
+
+        .section-item {
             display: flex;
             justify-content: space-between;
             align-items: center;
-            border: 1px solid #334155;
-            font-size: 14px;
+            background-color: var(--card-bg);
+            padding: 10px 12px;
+            border-radius: 6px;
+            border: 1px solid var(--border-color);
+            transition: border-color 0.3s;
         }
-        li button {
-            background-color: #ef4444;
-            padding: 4px 8px;
-            font-size: 12px;
+
+        .section-item:hover {
+            border-color: var(--accent-color);
         }
-        li button:hover {
-            background-color: #dc2626;
-        }
-        .back-btn {
-            display: block;
-            text-align: center;
-            margin-top: 25px;
-            color: #38bdf8;
+
+        .btn {
+            background-color: var(--accent-color);
+            color: white;
+            border: none;
+            padding: 6px 14px;
+            border-radius: 6px;
+            cursor: pointer;
+            font-weight: bold;
+            font-size: 13px;
             text-decoration: none;
-            font-size: 14px;
+            transition: background 0.3s, transform 0.2s;
         }
-        .back-btn:hover {
+
+        .btn:hover {
+            background-color: var(--accent-hover);
+            transform: scale(1.05);
+        }
+
+        .footer-text {
+            text-align: center;
+            font-size: 13px;
+            color: var(--text-secondary);
+            margin-top: 20px;
+        }
+
+        .footer-text a {
+            color: var(--accent-color);
+            text-decoration: none;
+        }
+
+        .footer-text a:hover {
             text-decoration: underline;
         }
     </style>
 </head>
 <body>
 
-    <div class="todo-card">
-        <h1>To-Do List 📝</h1>
-        
-        <div class="input-box">
-            <input type="text" id="taskInput" placeholder="Add a new task...">
-            <button onclick="addTask()">Add</button>
+    <div class="portfolio-card">
+        <button class="theme-toggle" id="themeBtn" onclick="toggleTheme()">☀️ Light</button>
+
+        <h1>Guguloth Uday Kiran</h1>
+        <div class="subtitle">Aspiring Frontend Developer & Tech Enthusiast</div>
+
+        <div class="section-box">
+            <h3>About Me</h3>
+            <span style="color: var(--text-secondary);">Currently working in India Post as ABPM, but passionate about transitioning into the tech industry. Self-taught in HTML, CSS, and JavaScript, aiming to build impactful web applications and secure a technical role.</span>
         </div>
 
-        <ul id="taskList"></ul>
+        <div class="section-box">
+            <h3>Tech Stack & Skills</h3>
+            <div class="skills-badges">
+                <span class="badge">HTML5</span>
+                <span class="badge">CSS3 (Flexbox/Grid)</span>
+                <span class="badge">JavaScript (DOM)</span>
+                <span class="badge">Git & GitHub</span>
+                <span class="badge">Responsive Design</span>
+            </div>
+        </div>
 
-        <a href="index.html" class="back-btn">← Back to Portfolio</a>
+        <div class="section-box">
+            <h3>Resume</h3>
+            <div class="section-item">
+                <span style="color: var(--text-color);">View My Professional Resume</span>
+                <a href="resume.html" class="btn" target="_blank">View Resume</a>
+            </div>
+        </div>
+
+        <div class="section-box">
+            <h3>My Projects 🚀</h3>
+            <div class="section-list">
+                <div class="section-item">
+                    <span>Digital Clock App</span>
+                    <a href="clock.html" class="btn" target="_blank">View Live</a>
+                </div>
+                <div class="section-item">
+                    <span>To-Do List (Local Storage)</span>
+                    <a href="todo.html" class="btn" target="_blank">View Live</a>
+                </div>
+                <div class="section-item">
+                    <span>Weather App (JS)</span>
+                    <a href="weather.html" class="btn" target="_blank">View Live</a>
+                </div>
+                <div class="section-item">
+                    <span>Quote Generator (JS)</span>
+                    <a href="quote.html" class="btn" target="_blank">View Live</a>
+                </div>
+            </div>
+        </div>
+
+        <div class="footer-text">
+            Reach out via <a href="https://linkedin.com" target="_blank">LinkedIn</a> or check my code on <a href="https://github.com" target="_blank">GitHub</a>.
+        </div>
     </div>
 
     <script>
-        // Select elements
-        const taskInput = document.getElementById('taskInput');
-        const taskList = document.getElementById('taskList');
-
-        // Load saved tasks from Local Storage when page opens
-        document.addEventListener('DOMContentLoaded', loadTasks);
-
-        function addTask() {
-            const taskText = taskInput.value.trim();
-            if (taskText === "") {
-                alert("Please enter a task!");
-                return;
+        function toggleTheme() {
+            const body = document.body;
+            const themeBtn = document.getElementById('themeBtn');
+            
+            body.classList.toggle('light-mode');
+            
+            if (body.classList.contains('light-mode')) {
+                themeBtn.textContent = "🌙 Dark";
+            } else {
+                themeBtn.textContent = "☀️ Light";
             }
-
-            createTaskElement(taskText);
-            saveTaskToLocalStorage(taskText);
-            taskInput.value = "";
-        }
-
-        function createTaskElement(taskText) {
-            const li = document.createElement('li');
-            li.innerHTML = `
-                <span>${taskText}</span>
-                <button onclick="deleteTask(this)">Delete</button>
-            `;
-            taskList.appendChild(li);
-        }
-
-        // Save task to browser Local Storage
-        function saveTaskToLocalStorage(task) {
-            let tasks = localStorage.getItem('tasks') ? JSON.parse(localStorage.getItem('tasks')) : [];
-            tasks.push(task);
-            localStorage.setItem('tasks', JSON.stringify(tasks));
-        }
-
-        // Load tasks function
-        function loadTasks() {
-            let tasks = localStorage.getItem('tasks') ? JSON.parse(localStorage.getItem('tasks')) : [];
-            tasks.forEach(task => {
-                createTaskElement(task);
-            });
-        }
-
-        // Delete task function and update Local Storage
-        function deleteTask(button) {
-            const li = button.parentElement;
-            const taskText = li.querySelector('span').textContent;
-            li.remove();
-
-            let tasks = JSON.parse(localStorage.getItem('tasks'));
-            tasks = tasks.filter(task => task !== taskText);
-            localStorage.setItem('tasks', JSON.stringify(tasks));
         }
     </script>
 
